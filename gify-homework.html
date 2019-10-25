@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Giphy Homeworkk</title>
+    <style>
+
+    </style>
+</head>
+<body>
+        <div class="jumbotron">
+                <h1 class="display-4">Playing with Gifty API!</h1>
+                <p class="lead">Press any buttom bellow to display your prefered set of GIFs.</p>
+                <hr class="my-4">
+                <div id="buttons-section">
+                        Aqui van las opciones de los set de GIFs a desplegar. Son cinco por lo pronto.
+                </div>
+            </div>
+
+        <div id="gifs">Aqui van los GIFs en dos renglones de cinco cada uno. Al hacer click en ellos se animan o desaniman.</div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){ 
+    var topics = ["Memes", "Dogs", "Houses", "Doctors", "Beaches"];
+    var qString = "doctors";
+    var limitNum = 10;
+    
+    function searchGifs(topic) {
+        var apiKey = "jYsr4LE6RStNIO2ijVK6JHkmViIljleI";
+        var queryURL = "https://api.giphy.com/v1/gifs/search" + "?api_key=" + apiKey + "&q=" + topic + "&limit=10";
+        
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function(response) {
+            console.log(response);  
+         //   $("#movies-view").empty;
+         //   $("#movies-view").append("<p>" + response.Ratings[1] + "</p>");
+         //   $("#movies-view").append("<p>" + response.Plot + "</p>");
+         //   $("#movies-view").append("<p>" + response.Released + "</p>");
+        });
+        
+    }   
+    function createTopicsButtons(topics) {
+        $("#buttons-section").empty();
+        // Loops through the array of topics
+        for (var i = 0; i < topics.length; i++) {
+          // Then dynamicaly generates buttons for each movie in the array
+          var apiKey = "jYsr4LE6RStNIO2ijVK6JHkmViIljleI";
+          var queryURL = "https://api.giphy.com/v1/gifs/search" + "?api_key=" + apiKey + "&q=" + topics[i] + "&limit=10";                 
+          // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
+          var a = $("<a>");
+          // Adds Bootstrap classes to our button
+            a.addClass("btn btn-info btn-lg");
+          // Added a ref & role attributes
+            a.attr("ref", queryURL);
+            a.attr("role", "button");
+            a.attr("alt", "Display " + topics[i]);
+          // Provided the initial button text
+          a.text(topics[i]);
+          // Added the button to the buttons-section div
+          $("#buttons-section").append(a);
+          $a.on("click", function() {
+            SearchGIFs(topics[i]);
+          }
+        }
+    }
+var topics = ["Memes", "Dogs", "Houses", "Doctors", "Beaches"];
+createTopicsButtons(topics);
+// searchGifs("Doctors"); 
+}
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</html>
